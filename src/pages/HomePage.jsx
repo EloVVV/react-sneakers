@@ -1,8 +1,23 @@
 import {FavoriteIcon, PlusIcon, SearchIcon } from "../components/Icons/Icon";
-import product_img_1 from "../assets/products/product-img-1.png";
+
 import Slider from "../components/Slider/Slider";
+import PRODUCTS from "../data/PRODUCTS";
+import Product from "../components/Product/Product";
+import { useState } from "react";
 
 const HomePage = () => {
+
+    const [products, setProducts] = useState(PRODUCTS);
+    const [query, setQuery] = useState("");
+
+    const filteredProducts = products.filter((item) => item.name.toLowerCase().includes(query));
+
+
+    const onChangeQuery = (event) => {
+        setQuery(event.target.value.toLowerCase());
+
+    }
+
     return (
          <>
             <Slider/>
@@ -17,12 +32,18 @@ const HomePage = () => {
                         <div>
                             <SearchIcon size={20}/>
                         </div>
-                        <input type="text" placeholder="Поиск..." name="" id="" />
+                        <input 
+                        value={query}
+                        onChange={(e) => onChangeQuery(e)}
+                        type="text" 
+                        placeholder="Поиск..." 
+                        name="" 
+                        id="" />
                     </div>
                 </header>
 
                 <div className="products">
-                    <div className="product">
+                    {/* <div className="product">
                         <div className="product_action">
                             <FavoriteIcon/>
                         </div>
@@ -86,7 +107,18 @@ const HomePage = () => {
                                 <PlusIcon size={14}/>
                             </button>
                         </div>
-                    </div>
+                    </div> */}
+
+                    {
+                        filteredProducts.length ?
+                        (
+                            filteredProducts.map((product) => {
+                                return <Product key={product.id} product={product}/>
+                            })
+                        )
+                        :
+                        <h2>По вашему запросу "{query}" ничего не найдено!</h2>
+                    }
                 </div>
             </section>
          </>
