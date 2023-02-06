@@ -30,6 +30,8 @@ a {
     outline: none;
     text-decoration: none;
 
+    
+
     font-size: 16px;
     color: #fff;
     font-family: "Inter", sans-serif;
@@ -94,6 +96,8 @@ a {
             text-decoration: none;
             border: none;
             outline: none;
+
+           
 
             font-size: 14px;
             font-weight: 600;
@@ -207,6 +211,10 @@ a {
 
             width: var(--size);
             height: var(--size);
+            
+            top: 50%;
+            position: absolute;
+            transform: translateY(-50%);
 
             border: none;
             outline: none;
@@ -226,9 +234,11 @@ a {
             
             &.prev {
                 margin-left: calc(var(--size) / -2);
+                left: 0;
             }
             &.next {
                 margin-right: calc(var(--size) / -2);
+                right: 0;
             }
         }
     }
